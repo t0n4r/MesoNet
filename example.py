@@ -2,7 +2,7 @@ import numpy as np
 from classifiers import *
 from pipeline import *
 
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # 1 - Load the model and its pretrained weights
 classifier = Meso4()
@@ -16,7 +16,7 @@ dataGenerator = ImageDataGenerator(rescale=1./255)
 generator = dataGenerator.flow_from_directory(
         'test_images',
         target_size=(256, 256),
-        batch_size=1,
+        batch_size=2,
         class_mode='binary',
         subset='training')
 
@@ -28,6 +28,6 @@ print('Predicted :', classifier.predict(X), '\nReal class :', y)
 
 classifier.load('weights/Meso4_F2F')
 
-predictions = compute_accuracy(classifier, 'test_videos')
+predictions = compute_accuracy(classifier, 'D:\\Sample Test\\face2face')
 for video_name in predictions:
     print('`{}` video class prediction :'.format(video_name), predictions[video_name][0])

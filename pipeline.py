@@ -174,7 +174,7 @@ class FaceFinder(Video):
                     # Look for face in full frame
                     face_locations = face_recognition.face_locations(frame, number_of_times_to_upsample = 2)
                 else:
-                    # Avoid spending to much time on a long scene without faces
+                    # Avoid spending to much time on a long scene without faces   ***
                     reduced_frame = zoom(frame, (resize, resize, 1))
                     face_locations = face_recognition.face_locations(reduced_frame)
                     

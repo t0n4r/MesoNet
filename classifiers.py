@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
-from keras.models import Model as KerasModel
-from keras.layers import Input, Dense, Flatten, Conv2D, MaxPooling2D, BatchNormalization, Dropout, Reshape, Concatenate, LeakyReLU
-from keras.optimizers import Adam
+from tensorflow.keras.models import Model as KerasModel
+from tensorflow.keras.layers import Input, Dense, Flatten, Conv2D, MaxPooling2D, BatchNormalization, Dropout, Reshape, Concatenate, LeakyReLU
+from tensorflow.keras.optimizers import Adam
 
 IMGWIDTH = 256
 
@@ -13,6 +13,9 @@ class Classifier:
     def predict(self, x):
         return self.model.predict(x)
     
+    #def fit_generator(self, x, y):
+     #   return self.model.
+
     def fit(self, x, y):
         return self.model.train_on_batch(x, y)
     
@@ -22,14 +25,13 @@ class Classifier:
     def load(self, path):
         self.model.load_weights(path)
 
-
 class Meso1(Classifier):
     """
     Feature extraction + Classification
     """
     def __init__(self, learning_rate = 0.001, dl_rate = 1):
         self.model = self.init_model(dl_rate)
-        optimizer = Adam(lr = learning_rate)
+        optimizer = Adam(lr = learning_rate)                            #Adam is an adaptive learning rate optimization algorithm 
         self.model.compile(optimizer = optimizer, loss = 'mean_squared_error', metrics = ['accuracy'])
     
     def init_model(self, dl_rate):
